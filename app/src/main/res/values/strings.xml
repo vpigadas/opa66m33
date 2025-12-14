@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="dev_name">Vassilis Pigadas</string>
 </resources>
