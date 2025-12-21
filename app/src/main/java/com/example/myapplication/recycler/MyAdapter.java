@@ -14,9 +14,11 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private List<String> dataList;
+    private View.OnClickListener listener;
 
-    public MyAdapter(List<String> dataList) {
+    public MyAdapter(List<String> dataList, View.OnClickListener clickListener) {
         this.dataList = dataList;
+        this.listener = clickListener;
     }
 
     @NonNull
@@ -25,6 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         HolderFirstRowBinding binding = HolderFirstRowBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         View view = binding.getRoot();
+        view.setOnClickListener(listener);
 
         return new MyViewHolder(binding);
 //        return new MyViewHolder(view);

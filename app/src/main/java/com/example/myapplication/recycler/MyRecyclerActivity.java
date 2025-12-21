@@ -1,6 +1,8 @@
 package com.example.myapplication.recycler;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityMyRecyclerBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.List;
 public class MyRecyclerActivity extends AppCompatActivity {
 
     private ActivityMyRecyclerBinding binding;
+    private Boolean clickRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,24 @@ public class MyRecyclerActivity extends AppCompatActivity {
         });
 
 
-        binding.recycler.setAdapter(new MyAdapter(getDataList()));
+        binding.recycler.setAdapter(new MyAdapter(getDataList(), new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(!clickRunning){
+                    clickRunning = true;
+                    Snackbar.make(v, "Row clicked !!!", Snackbar.LENGTH_SHORT).addCallback(new Snackbar.Callback(){
+                        @Override
+                        public void onDismissed(Snackbar transientBottomBar, int event) {
+                            super.onDismissed(transientBottomBar, event);
+                            clickRunning = false;
+                        }
+                    }).show();
+                }else {
+                    Log.i("RecyclerView", "ignore click event!!!");
+                }
+            }
+        }));
     }
 
     private List<String> getDataList() {
