@@ -13,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
+import com.example.myapplication.network.NetworkActivity;
+import com.example.myapplication.recycler.MyRecyclerActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +59,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SecondScreen.class);
+                intent.putExtra("name", "Vassilis");
+                intent.putExtra("age", 100);
+
+                Bundle parameter = new Bundle();
+                parameter.putString("name", "Vassilis");
+                parameter.putInt("age", 100);
+                intent.putExtras(parameter);
+
+//                startActivity(intent);
+                startActivityForResult(intent, 5000);
+            }
+        });
+
+        binding.mainBtnRecycler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyRecyclerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.mainBtnNetwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NetworkActivity.class);
                 startActivity(intent);
             }
         });
@@ -67,5 +94,29 @@ public class MainActivity extends AppCompatActivity {
 //                Log.d("MainActivity", "user press a button !!!");
 //            }
 //        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (data != null) {
+            Log.d("MainActivity", "requestCode:" + requestCode + " resultCode:" + resultCode + " intent" + data.toString());
+
+            Bundle extras = data.getExtras();
+
+            if (extras != null) {
+                String name = extras.getString("name");
+                int age = extras.getInt("age");
+
+                Log.d("MainActivity", "name:" + name + " age:" + age);
+            }
+
+        } else {
+            Log.d("MainActivity", "requestCode:" + requestCode + " resultCode:" + resultCode);
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+
     }
 }
