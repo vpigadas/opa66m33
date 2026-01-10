@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.network.NetworkActivity;
 import com.example.myapplication.recycler.MyRecyclerActivity;
+import com.example.myapplication.storage.StorageActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,6 +85,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NetworkActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.mainBtnStorage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, StorageActivity.class);
                 startActivity(intent);
             }
         });
