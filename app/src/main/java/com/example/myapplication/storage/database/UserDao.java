@@ -2,6 +2,7 @@ package com.example.myapplication.storage.database;
 
 import android.database.SQLException;
 
+import androidx.annotation.NonNull;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -10,6 +11,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -31,5 +33,18 @@ public interface UserDao {
     @Query("SELECT * FROM User")
     @NotNull
     public List<UserEntity> readAll();
+
+
+    @Query("SELECT * FROM User LIMIT 1")
+    @Nullable
+    public UserEntity readFirst();
+
+    @Query("SELECT * FROM User WHERE user_name LIKE :name")
+    @NonNull
+    public List<UserEntity> readByName(String name);
+
+    @Query("SELECT * FROM User WHERE user_name LIKE :name AND age = :age")
+    @NonNull
+    public List<UserEntity> readNameAndAge(String name, int age);
 
 }

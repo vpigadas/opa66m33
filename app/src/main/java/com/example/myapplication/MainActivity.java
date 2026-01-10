@@ -16,6 +16,7 @@ import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.network.NetworkActivity;
 import com.example.myapplication.recycler.MyRecyclerActivity;
 import com.example.myapplication.storage.StorageActivity;
+import com.example.myapplication.storage.database.DatabaseActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StorageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.mainBtnDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DatabaseActivity.class);
                 startActivity(intent);
             }
         });

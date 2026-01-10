@@ -45,12 +45,12 @@ public class UserEntity {
         this.age = age;
     }
 
-    public String getJob_title() {
+    public String getJobTitle() {
         return jobTitle;
     }
 
-    public void setJob_title(String job_title) {
-        this.jobTitle = job_title;
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     @Override
