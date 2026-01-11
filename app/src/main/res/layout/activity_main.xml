@@ -65,5 +65,11 @@
         android:layout_height="wrap_content"
         android:text="Database Activity" />
 
+    <Button
+        android:id="@+id/main_btn_database_v2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Database Activity v2" />
+
 
 </LinearLayout>

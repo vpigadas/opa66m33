@@ -3,6 +3,7 @@ package com.example.myapplication.storage.database;
 import android.database.SQLException;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -27,12 +28,25 @@ public interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void save(UserEntity user);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void save(List<UserEntity> users);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void saveAll(List<UserEntity> users);
+
     @Delete
     public void delete(UserEntity user);
+
+    @Delete
+    public void delete(List<UserEntity> user);
 
     @Query("SELECT * FROM User")
     @NotNull
     public List<UserEntity> readAll();
+
+    @Query("SELECT * FROM User")
+    @NotNull
+    public LiveData<List<UserEntity>> streamReadAll();
 
 
     @Query("SELECT * FROM User LIMIT 1")
