@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
+import com.example.myapplication.fragment.MyFragmentActivity;
 import com.example.myapplication.network.NetworkActivity;
 import com.example.myapplication.recycler.MyRecyclerActivity;
 import com.example.myapplication.storage.StorageActivity;
@@ -111,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DatabaseV2Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.mainBtnFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyFragmentActivity.class);
                 startActivity(intent);
             }
         });
