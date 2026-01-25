@@ -16,6 +16,7 @@ import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.fragment.MyFragmentActivity;
 import com.example.myapplication.network.NetworkActivity;
 import com.example.myapplication.recycler.MyRecyclerActivity;
+import com.example.myapplication.smaple.SampleActivity;
 import com.example.myapplication.storage.StorageActivity;
 import com.example.myapplication.storage.database.DatabaseActivity;
 import com.example.myapplication.storage.database.v2.DatabaseV2Activity;
@@ -120,6 +121,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyFragmentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.mainBtnSample.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SampleActivity.class);
                 startActivity(intent);
             }
         });

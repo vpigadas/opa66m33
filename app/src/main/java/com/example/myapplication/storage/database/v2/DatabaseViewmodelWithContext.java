@@ -2,6 +2,8 @@ package com.example.myapplication.storage.database.v2;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -25,6 +27,11 @@ public class DatabaseViewmodelWithContext extends AndroidViewModel {
     public LiveData<List<UserEntity>> streamUsers;
 
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private ExecutorService executorServices = Executors.newFixedThreadPool(4);
+    private ExecutorService executorServicess = Executors.newWorkStealingPool(4);
+
+    private Looper myLoop = Looper.myLooper();
+    private Handler handler = new Handler(myLoop);
 
     public DatabaseViewmodelWithContext(@NonNull Application application) {
         super(application);
@@ -44,11 +51,28 @@ public class DatabaseViewmodelWithContext extends AndroidViewModel {
                 dbInstance.getUserDao().save(data);
             }
         });
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                dbInstance.getUserDao().save(data);
+            }
+        });
     }
 
     @Override
     protected void onCleared() {
         executorService.shutdown();
+
+        handler.removeCallbacks(null);
+        myLoop.quit();
         super.onCleared();
     }
 }
+
+
+
+
+
+
+
